@@ -1,8 +1,6 @@
 import run from 'aocrunner';
 
-const parseInput = (rawInput: string) => rawInput
-  .split('\n')
-  .filter(Boolean);
+const parseInput = (rawInput: string) => rawInput.split('\n').filter(Boolean);
 
 const part1 = (rawInput: string) => {
   const input = parseInput(rawInput);
