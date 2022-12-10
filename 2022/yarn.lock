@@ -50,10 +50,10 @@
     "normalize-path" "^3.0.0"
     "picomatch" "^2.0.4"
 
-"aocrunner@^1.9.5":
-  "integrity" "sha512-iRl8taTr5ZswFkkm2595T0xx9oSrAxM2TPj4J/YoRktfqP8bZh9Tsa9siuhhCigLXkgggM3rk4SGrC5iSxaAdA=="
-  "resolved" "https://registry.npmjs.org/aocrunner/-/aocrunner-1.9.5.tgz"
-  "version" "1.9.5"
+"aocrunner@^1.9.6":
+  "integrity" "sha512-YD009/Ubd2CH3qXJ3RfYAfaJipVAfZYfJShWRPyLdtHeS2+ob1LiBv03JHD1LI6/SIZNhKo1OEGFci38BxCQLA=="
+  "resolved" "https://registry.npmjs.org/aocrunner/-/aocrunner-1.9.6.tgz"
+  "version" "1.9.6"
   dependencies:
     "chokidar" "^3.5.3"
     "common-tags" "^1.8.2"
