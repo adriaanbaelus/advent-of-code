@@ -20,5 +20,8 @@
   },
   "engines": {
     "node": ">=16.13.0"
+  },
+  "dependencies": {
+    "@datastructures-js/priority-queue": "^6.1.4"
   }
 }
