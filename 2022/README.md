@@ -133,8 +133,8 @@ Both parts: 22.658ms
 ```
 Day 10
 Time part 1: 0.159ms
-Time part 2: -
-Both parts: 0.159ms
+Time part 2: 0.167ms
+Both parts: 0.326ms
 ```
 
 ```
