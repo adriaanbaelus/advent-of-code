@@ -9,8 +9,6 @@ interface Graph {
   withinDistance: (from: Valve, distance: number) => (to: Valve) => boolean;
 }
 
-const debug = false;
-
 const parseInput = (rawInput: string) =>
   rawInput.split('\n').reduce((valves, line) => {
     const matches = line.match(
@@ -90,9 +88,7 @@ const findOptimalRelease = (
   for (let target of next) {
     const timeAfterTravel = turns - graph.distance(from, target);
     // Check which other unopened valves can still be reached from there
-    const nextForTarget = next.filter(
-      graph.withinDistance(target, timeAfterTravel),
-    );
+    const nextForTarget = next.filter(graph.withinDistance(target, timeAfterTravel));
     // Recur with the picked valve and remaining time
     // (which will give you the maximal total release if you were to go to that valve and open it)
     let [targetReleased, targetPath] = findOptimalRelease(
@@ -113,49 +109,45 @@ const findOptimalRelease = (
 
 const part1 = (rawInput: string) => {
   const valves = parseInput(rawInput);
-  debug && console.log(valves);
   const graph = makeGraph(valves);
-  debug &&
-    console.log(
-      `# valves: ${graph.valves.length}, # flowing valves: ${graph.valvesWithFlow.length}`,
-    );
-  debug && console.log('Distance between flowing valves:');
-  const relevantValves = [graph.initialValve, ...graph.valvesWithFlow];
-  for (let v of relevantValves) {
-    debug &&
-      console.log(
-        `- From ${v.key}:`,
-        relevantValves.map((to) => `${to.key}:${graph.distance(v, to)}`),
-      );
-  }
-  const [total, path] = findOptimalRelease(graph);
-  let t = 0;
-  for (let i = 1; i < path.length; i++) {
-    const fromKey = path[i - 1];
-    const toKey = path[i];
-    const from = graph.valves.find((v) => v.key === fromKey) as Valve;
-    const to = graph.valves.find((v) => v.key === toKey) as Valve;
-    const dist = graph.distance(from, to);
-    debug &&
-      console.log(`${t}: Moving from ${fromKey} to ${toKey} in ${dist} turns`);
-    t += dist;
-    debug &&
-      console.log(
-        `${t}: Opening ${toKey} (releasing ${to.flow} for ${
-          30 - t - 1
-        } turns, ${to.flow * (30 - t - 1)} total)`,
-      );
-    t += 1;
-  }
-  debug && console.log(`Done in ${t} turns`);
-  debug && console.log(`Total release = ${total} for path:`, path);
-  return total;
+  const [score] = findOptimalRelease(graph);
+  return score;
 };
 
-const part2 = (rawInput: string) => {
-  const input = parseInput(rawInput);
+function* combinations<T>(items: T[]): Generator<T[]> {
+  if (items.length === 0) return items;
+  if (items.length === 1) {
+    yield items;
+  } else {
+    yield [items[0]];
+    for (const c of combinations(items.slice(1))) {
+      yield c;
+      yield [items[0], ...c];
+    }
+  }
+}
 
-  return;
+function* distributions<T>(items: T[]): Generator<[T[], T[]]> {
+  for (const itemsA of combinations(items)) {
+    if (itemsA.length === 0 || itemsA.length === items.length) continue;
+    const itemsB = items.filter((i) => !itemsA.includes(i));
+    yield [itemsA, itemsB];
+  }
+}
+
+const part2 = (rawInput: string) => {
+  const valves = parseInput(rawInput);
+  const graph = makeGraph(valves);
+
+  let bestScore = 0;
+  for (const [pDestinations, eDestinations] of distributions(graph.valvesWithFlow)) {
+    const [pReleased] = findOptimalRelease(graph, graph.initialValve, pDestinations, 27);
+    const [eReleased] = findOptimalRelease(graph, graph.initialValve, eDestinations, 27);
+    const score = pReleased + eReleased;
+    bestScore = Math.max(bestScore, score);
+  }
+
+  return bestScore;
 };
 
 run({
