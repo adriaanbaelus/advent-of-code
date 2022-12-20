@@ -44,20 +44,14 @@ const findAdjacent = (x: number, y: number, w: number, h: number) => {
 // References:
 // https://brilliant.org/wiki/dijkstras-short-path-finder/
 // https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm#Using_a_priority_queue
-function dijkstra(
-  nodes: Graph,
-  start: GraphKey,
-  cost: DijkstraCostFn = costGoingUp,
-) {
+function dijkstra(nodes: Graph, start: GraphKey, cost: DijkstraCostFn = costGoingUp) {
   const dist = {} as Record<string, number>;
   const visited = new Set<GraphKey>();
   for (let n of Object.keys(nodes)) {
     dist[n] = Infinity;
   }
   dist[start] = 0;
-  const queue = new PriorityQueue<GraphKey>((a, b) =>
-    dist[b] < dist[a] ? 1 : -1,
-  );
+  const queue = new PriorityQueue<GraphKey>((a, b) => (dist[b] < dist[a] ? 1 : -1));
   queue.enqueue(start);
 
   while (!queue.isEmpty()) {

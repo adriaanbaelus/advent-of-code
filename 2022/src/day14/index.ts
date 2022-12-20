@@ -54,10 +54,7 @@ const parseInput = (rawInput: string) =>
 const coord = (x: number, y: number): Coord => `${x},${y}`;
 const toUnit = (n: number) => (n > 0 ? 1 : n < 0 ? -1 : 0);
 
-const dropSand = (
-  chart: Chart,
-  [x = ORIGIN.x, y = ORIGIN.y] = [],
-): [number, number] | null => {
+const dropSand = (chart: Chart, [x = ORIGIN.x, y = ORIGIN.y] = []): [number, number] | null => {
   const { blocks, maxY } = chart;
   if (y > maxY) return null;
   if (blocks[coord(ORIGIN.x, ORIGIN.y)]) return null;

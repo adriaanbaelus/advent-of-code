@@ -24,11 +24,7 @@ const distance = (from: Point, to: Point) => {
   return Math.abs(to[1] - from[1]) + Math.abs(to[0] - from[0]);
 };
 
-const intersectionAtY = (
-  [cx, cy]: Point,
-  r: number,
-  y: number,
-): Range | null => {
+const intersectionAtY = ([cx, cy]: Point, r: number, y: number): Range | null => {
   const distanceY = Math.abs(cy - y);
   if (distanceY > r) return null;
   const distanceX = r - distanceY;
@@ -82,10 +78,7 @@ const part2 = (rawInput: string) => {
   // - walk all possible Y values
   // - check if there is an X value outside of the 'covered' intersections at Y
   for (let y = 0; y <= 4000000; y++) {
-    const [, [startOfSecondIntersection] = []] = findAllIntersectionsAtY(
-      y,
-      input,
-    );
+    const [, [startOfSecondIntersection] = []] = findAllIntersectionsAtY(y, input);
     // Technically we should also check if the first intersection starts after 0 or ends before 4000000
     // (in case the beacon is at one of the edges), but this worked fine with my input 🤷
     if (startOfSecondIntersection) {

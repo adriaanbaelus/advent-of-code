@@ -1,7 +1,6 @@
 import run from 'aocrunner';
 
-const parseInput = (rawInput: string) =>
-  rawInput.split('\n').filter(Boolean)[0];
+const parseInput = (rawInput: string) => rawInput.split('\n').filter(Boolean)[0];
 
 function containsDuplicates(input: string) {
   for (let i = 0; i < input.length; i++) {

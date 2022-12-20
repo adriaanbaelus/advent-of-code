@@ -67,10 +67,7 @@ function parseFileOutput(ctx: Context, input: string) {
 
 function calculateSize(item: File | Dir): number {
   if (isDir(item)) {
-    return Object.values(item).reduce(
-      (sum: number, item) => sum + calculateSize(item),
-      0,
-    );
+    return Object.values(item).reduce((sum: number, item) => sum + calculateSize(item), 0);
   }
   return item;
 }

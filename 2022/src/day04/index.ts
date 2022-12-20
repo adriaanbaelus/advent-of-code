@@ -2,8 +2,7 @@ import run from 'aocrunner';
 
 type Range = [number, number];
 
-const parseRange = (rawInput: string) =>
-  rawInput.split('-').map(Number) as Range;
+const parseRange = (rawInput: string) => rawInput.split('-').map(Number) as Range;
 const parseInput = (rawInput: string) =>
   rawInput
     .split('\n')
