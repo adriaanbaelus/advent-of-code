@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "@datastructures-js/priority-queue": "^6.1.4",
-    "chalk": "^5.2.0"
+    "chalk": "^5.2.0",
+    "immutable": "^4.2.1"
   }
 }
