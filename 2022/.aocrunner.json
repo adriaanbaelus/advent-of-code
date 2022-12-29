@@ -358,16 +358,16 @@
     },
     {
       "part1": {
-        "solved": false,
-        "result": null,
+        "solved": true,
+        "result": "2---0-1-2=0=22=2-011",
         "attempts": [],
-        "time": null
+        "time": 0.300031
       },
       "part2": {
         "solved": false,
-        "result": null,
+        "result": "50*",
         "attempts": [],
-        "time": null
+        "time": 0.014210
       }
     }
   ]
